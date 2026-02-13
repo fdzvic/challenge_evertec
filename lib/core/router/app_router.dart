@@ -1,6 +1,6 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/features/auth/auth.dart';
-import 'package:challenge_evertec/features/home/home.dart';
+import 'package:challenge_evertec/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
