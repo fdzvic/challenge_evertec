@@ -1,0 +1,16 @@
+{
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "email": "Correo",
+  "password": "Contraseña",
+  "confirmPassword": "Confirmar contraseña",
+  "logout": "Cerrar sesión",
+  "darkMode": "Modo oscuro",
+  "favorites": "Favoritos",
+  "profile": "Perfil",
+  "home": "Inicio",
+  "name": "Nombre",
+  "lastName": "Apellidos",
+  "phone": "Teléfono",
+  "haveAccount": "¿Ya tienes una cuenta? Inicia sesión"
+}

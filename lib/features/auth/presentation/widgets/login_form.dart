@@ -1,3 +1,4 @@
+import 'package:challenge_evertec/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,18 +36,18 @@ class _LoginFormState extends State<LoginForm> {
             children: [
               EvInput(
                 controller: _emailController,
-                label: 'Email',
+                label: S.current.email,
                 inputValueType: InputValueType.email,
               ),
               const SizedBox(height: 16),
               EvInput(
                 controller: _passwordController,
-                label: 'Password',
+                label: S.current.password,
                 inputValueType: InputValueType.password,
               ),
               const SizedBox(height: 24),
               EvButton(
-                text: 'Login',
+                text: S.current.login,
                 isLoading: isLoading,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -59,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
               const SizedBox(height: 24),
               EvButton(
-                text: 'Registrarse',
+                text: S.current.register,
                 onPressed: () {
                   context.push('/register');
                 },

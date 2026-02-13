@@ -16,7 +16,7 @@ class RegisterPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: const [
                 Text(
-                  'Register',
+                  'Registrarse',
                   style: TextStyle(fontSize: 24),
                 ),
                 SizedBox(height: 24),

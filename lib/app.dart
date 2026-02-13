@@ -1,9 +1,11 @@
 import 'package:challenge_evertec/core/router/app_router.dart';
+import 'package:challenge_evertec/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/di/service_locator.dart';
 import 'core/theme/theme.dart';
 import 'features/auth/auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -36,6 +38,13 @@ class _MyAppState extends State<MyApp> {
             darkTheme: AppTheme.darkTheme,
             themeMode: state.themeMode,
             routerConfig: _appRouter.router,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              S.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
           );
         },
       ),

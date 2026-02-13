@@ -1,0 +1,16 @@
+{
+  "login": "Login",
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "logout": "Logout",
+  "darkMode": "Dark Mode",
+  "favorites": "Favorites",
+  "profile": "Profile",
+  "home": "Home",
+  "name": "Name",
+  "lastName": "Last Name",
+  "phone": "Phone number",
+  "haveAccount": "Already have an account? Login"
+}

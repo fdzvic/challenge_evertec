@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/theme.dart';
-import '../../../../features/auth/auth.dart';
+import '../../../auth/auth.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});

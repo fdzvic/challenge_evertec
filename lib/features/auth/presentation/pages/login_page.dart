@@ -1,3 +1,4 @@
+import 'package:challenge_evertec/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import '../widgets/login_form.dart';
 
@@ -14,14 +15,10 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text(
-                  'Login',
-                  style: TextStyle(fontSize: 24),
-                ),
+              children: [
+                Text(S.current.login, style: TextStyle(fontSize: 24)),
                 SizedBox(height: 24),
                 LoginForm(),
-                
               ],
             ),
           ),
@@ -30,4 +27,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-

@@ -1,3 +1,4 @@
+import 'package:challenge_evertec/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -37,37 +38,45 @@ class _RegisterFormState extends State<RegisterForm> {
           key: _formKey,
           child: Column(
             children: [
-              EvInput(controller: _firstNameController, label: 'First Name'),
+              EvInput(
+                controller: _firstNameController,
+                label: S.current.name,
+                inputValueType: InputValueType.name,
+              ),
               const SizedBox(height: 16),
-              EvInput(controller: _lastNameController, label: 'Last Name'),
+              EvInput(
+                controller: _lastNameController,
+                label: S.current.lastName,
+                inputValueType: InputValueType.name,
+              ),
               const SizedBox(height: 16),
               EvInput(
                 controller: _phoneController,
-                label: 'Phone',
+                label:S.current.phone,
                 inputValueType: InputValueType.phone,
               ),
               const SizedBox(height: 16),
               EvInput(
                 controller: _emailController,
-                label: 'Email',
+                label: S.current.email,
                 inputValueType: InputValueType.email,
               ),
               const SizedBox(height: 16),
               EvInput(
                 controller: _passwordController,
-                label: 'Password',
+                label: S.current.password,
                 inputValueType: InputValueType.password,
               ),
               const SizedBox(height: 16),
               EvInput(
                 controller: _confirmPasswordController,
-                label: 'Confirm Password',
+                label: S.current.confirmPassword,
                 inputValueType: InputValueType.password,
                 matchValue: _passwordController.text,
               ),
               const SizedBox(height: 24),
               EvButton(
-                text: 'Register',
+                text: S.current.register,
                 isLoading: isLoading,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -86,7 +95,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 onPressed: () {
                   context.pop();
                 },
-                child: const Text('Already have an account? Login'),
+                child: Text(S.current.haveAccount),
               ),
             ],
           ),
