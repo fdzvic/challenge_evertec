@@ -1,33 +1,41 @@
+import 'package:challenge_evertec/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(const ThemeState(themeMode: ThemeMode.system));
+  final ThemeLocalDataSource localDataSource;
 
-  void setLightMode() {
-    emit(state.copyWith(themeMode: ThemeMode.light, ));
+  ThemeCubit(this.localDataSource)
+      : super(const ThemeState(themeMode: ThemeMode.system));
+
+  Future<void> setDarkMode() async {
+    await localDataSource.saveTheme('dark');
+    emit(const ThemeState(themeMode: ThemeMode.dark));
   }
 
-  void setDarkMode() {
-    emit(state.copyWith(themeMode: ThemeMode.dark));
+  Future<void> setLightMode() async {
+    await localDataSource.saveTheme('light');
+    emit(const ThemeState(themeMode: ThemeMode.light));
   }
 
-  void setSystemMode() {
-    emit(state.copyWith(themeMode: ThemeMode.system));
-  }
+  Future<void> loadTheme() async {
+    final theme = localDataSource.getTheme();
 
-  void toggleTheme() {
-    if (state.themeMode == ThemeMode.light) {
-      setDarkMode();
-    } else {
-      setLightMode();
+    if (theme == 'dark') {
+      emit(const ThemeState(themeMode: ThemeMode.dark));
+    } else if (theme == 'light') {
+      emit(const ThemeState(themeMode: ThemeMode.light));
     }
   }
 
   bool isDarkMode(Brightness platformBrightness) {
-    if (state.themeMode == ThemeMode.dark) return true;
-    if (state.themeMode == ThemeMode.light) return false;
-    return platformBrightness == Brightness.dark;
+    switch (state.themeMode) {
+      case ThemeMode.dark:
+        return true;
+      case ThemeMode.light:
+        return false;
+      case ThemeMode.system:
+        return platformBrightness == Brightness.dark;
+    }
   }
 }
