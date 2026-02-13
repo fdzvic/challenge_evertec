@@ -13,13 +13,15 @@ class LoginPage extends StatelessWidget {
           elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(S.current.login, style: TextStyle(fontSize: 24)),
-                SizedBox(height: 24),
-                LoginForm(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(S.current.login, style: TextStyle(fontSize: 24)),
+                  SizedBox(height: 24),
+                  LoginForm(),
+                ],
+              ),
             ),
           ),
         ),

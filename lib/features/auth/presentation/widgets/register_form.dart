@@ -91,11 +91,11 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
               ),
               const SizedBox(height: 24),
-              TextButton(
+              EvButton(
+                text: S.current.haveAccount,
                 onPressed: () {
                   context.pop();
                 },
-                child: Text(S.current.haveAccount),
               ),
             ],
           ),

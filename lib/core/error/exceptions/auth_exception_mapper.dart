@@ -24,7 +24,7 @@ class AuthExceptionMapper {
         return 'Error de conexión. Verifica tu internet.';
 
       case 'invalid-credential':
-        return 'Credenciales inválidas. Inténtalo nuevamente.';
+        return 'Credenciales inválidas. Inténtalo nuevamente.';      
 
       default:
         return 'Ocurrió un error inesperado. Inténtalo nuevamente.';

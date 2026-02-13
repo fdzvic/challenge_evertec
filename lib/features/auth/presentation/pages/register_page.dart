@@ -12,16 +12,18 @@ class RegisterPage extends StatelessWidget {
           elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text(
-                  'Registrarse',
-                  style: TextStyle(fontSize: 24),
-                ),
-                SizedBox(height: 24),
-                RegisterForm(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Text(
+                    'Registrarse',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  SizedBox(height: 24),
+                  RegisterForm(),
+                ],
+              ),
             ),
           ),
         ),

@@ -10,27 +10,7 @@ class AppRouter {
   late final GoRouter router = GoRouter(
     initialLocation: '/splash',
     refreshListenable: GoRouterRefreshStream(authCubit.stream),
-    redirect: (context, state) {
-      final authState = authCubit.state;
-      final path = state.matchedLocation;
-
-      final isAuthRoute = path == '/login' || path == '/register';
-
-      if (authState is AuthInitial || authState is AuthLoading) {
-        return path == '/splash' ? null : '/splash';
-      }
-
-      if (authState is AuthUnauthenticated) {
-        return isAuthRoute ? null : '/login';
-      }
-
-      if (authState is AuthAuthenticated) {
-        return path == '/home' ? null : '/home';
-      }
-
-      return null;
-    },
-
+    redirect: _handleRedirect,
     routes: [
       GoRoute(path: '/splash', builder: (context, state) => const SplashPage()),
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
@@ -41,6 +21,19 @@ class AppRouter {
       ),
     ],
   );
+  String? _handleRedirect(BuildContext context, GoRouterState state) {
+    final authState = authCubit.state;
+    final currentRoute = state.matchedLocation;
+    final isAuthRoute = currentRoute == '/login' || currentRoute == '/register';
+
+    return switch (authState) {
+      AuthInitial() => currentRoute == '/splash' ? null : '/splash',
+      AuthLoading() => null,
+      AuthUnauthenticated() || AuthError() => isAuthRoute ? null : '/login',
+      AuthAuthenticated() => currentRoute == '/home' ? null : '/home',
+      _ => null,
+    };
+  }
 }
 
 class GoRouterRefreshStream extends ChangeNotifier {
