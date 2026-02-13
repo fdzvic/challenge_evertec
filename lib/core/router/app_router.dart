@@ -1,6 +1,5 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/features/auth/auth.dart';
-import 'package:challenge_evertec/features/auth/presentation/pages/splash_page.dart';
 import 'package:challenge_evertec/features/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,22 +12,33 @@ class AppRouter {
     refreshListenable: GoRouterRefreshStream(authCubit.stream),
     redirect: (context, state) {
       final authState = authCubit.state;
-      final isLoggingIn = state.matchedLocation == '/login';
+      final path = state.matchedLocation;
+
+      final isAuthRoute = path == '/login' || path == '/register';
+
+      if (authState is AuthInitial || authState is AuthLoading) {
+        return path == '/splash' ? null : '/splash';
+      }
 
       if (authState is AuthUnauthenticated) {
-        return isLoggingIn ? null : '/login';
+        return isAuthRoute ? null : '/login';
       }
 
       if (authState is AuthAuthenticated) {
-        return isLoggingIn ? '/home' : null;
+        return path == '/home' ? null : '/home';
       }
 
       return null;
     },
+
     routes: [
       GoRoute(path: '/splash', builder: (context, state) => const SplashPage()),
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(path: '/home', builder: (context, state) => const HomePage()),
+      GoRoute(
+        path: '/register',
+        builder: (context, state) => const RegisterPage(),
+      ),
     ],
   );
 }

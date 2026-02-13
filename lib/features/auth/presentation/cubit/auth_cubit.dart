@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../auth.dart';
 
-
 class AuthCubit extends Cubit<AuthState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
@@ -28,27 +27,40 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> login(String email, String password) async {
-  emit(AuthLoading());
-
-  try {
-    final user = await loginUseCase(email, password);
-    emit(AuthAuthenticated(user));
-  } on FirebaseAuthException catch (e) {
-    final message = AuthExceptionMapper.map(e);
-    emit(AuthError(message));
-  } catch (_) {
-    emit(AuthError('Ocurrió un error inesperado.'));
-  }
-}
-
-
-  Future<void> register(String email, String password) async {
     emit(AuthLoading());
+
     try {
-      final user = await registerUseCase(email, password);
+      final user = await loginUseCase(email, password);
+      emit(AuthAuthenticated(user));
+    } on FirebaseAuthException catch (e) {
+      final message = AuthExceptionMapper.map(e);
+      emit(AuthError(message));
+    } catch (_) {
+      emit(AuthError('Ocurrió un error inesperado.'));
+    }
+  }
+
+  Future<void> register({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String phone,
+  }) async {
+    emit(AuthLoading());
+
+    try {
+      final user = await registerUseCase(
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+      );
+
       emit(AuthAuthenticated(user));
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(const AuthError('Error al registrar usuario.'));
     }
   }
 
