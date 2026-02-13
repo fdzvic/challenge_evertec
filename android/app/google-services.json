@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "240634720853",
+    "project_id": "changelle-evertec",
+    "storage_bucket": "changelle-evertec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240634720853:android:cc4232ec3758bff6d6dadc",
+        "android_client_info": {
+          "package_name": "com.example.challenge_evertec"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAflgM2DAbKW5XuoavzFbupo41eZ9UHJ10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

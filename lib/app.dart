@@ -1,4 +1,4 @@
-import 'package:challenge_evertec/features/profile/pages/profile_page.dart';
+import 'package:challenge_evertec/features/auth/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/di/service_locator.dart';
@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: state.themeMode,
-            home: const ProfilePage(),
+            home: const LoginPage(),
           );
         },
       ),
