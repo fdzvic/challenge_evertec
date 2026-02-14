@@ -6,6 +6,8 @@ import '../models/movie_model.dart';
 abstract class MoviesDataSource {
   Future<List<MovieModel>> getPopularMovies(int page);
   Future<List<MovieModel>> getNowPlayingMovies(int page);
+  Future<List<MovieModel>> getTopRatedMovies(int page);
+  Future<List<MovieModel>> getUpcomingMovies(int page);
 }
 
 class MoviesDataSourceImpl implements MoviesDataSource {
@@ -32,6 +34,24 @@ class MoviesDataSourceImpl implements MoviesDataSource {
   Future<List<MovieModel>> getNowPlayingMovies(int page) async {
     final response = await client.get(
       '/movie/now_playing',
+      query: {'page': page.toString()},
+    );
+    return _jsonToMovies(response);
+  }
+
+  @override
+  Future<List<MovieModel>> getTopRatedMovies(int page) async {
+    final response = await client.get(
+      '/movie/top_rated',
+      query: {'page': page.toString()},
+    );
+    return _jsonToMovies(response);
+  }
+
+  @override
+  Future<List<MovieModel>> getUpcomingMovies(int page) async {
+    final response = await client.get(
+      '/movie/upcoming',
       query: {'page': page.toString()},
     );
     return _jsonToMovies(response);

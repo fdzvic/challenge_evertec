@@ -7,16 +7,33 @@ import '../../../../core/utils/design/molecules/molecules.dart';
 import '../cubit/movies_cubit.dart';
 
 class MoviesCategoriesHome extends StatelessWidget {
-  const MoviesCategoriesHome({super.key, required this.nowPlayingMovies, required this.popularMovies});
+  const MoviesCategoriesHome({
+    super.key,
+    required this.nowPlayingMovies,
+    required this.popularMovies,
+    required this.upcomingMovies,
+    required this.topRatedMovies,
+  });
 
   final List<MovieEntity> nowPlayingMovies;
   final List<MovieEntity> popularMovies;
+  final List<MovieEntity> upcomingMovies;
+  final List<MovieEntity> topRatedMovies;
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(floating: true, title: const EvAppBar()),
+        SliverAppBar(
+          floating: true,
+          title: EvAppBar(
+            title: 'Peliculas',
+            icon: Icons.movie,
+            onSearchPressed: () {
+              print('Buscando...');
+            },
+          ),
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) => Column(
@@ -25,15 +42,14 @@ class MoviesCategoriesHome extends StatelessWidget {
                 MoviesHorizontalListview(
                   movies: nowPlayingMovies,
                   title: 'En cines',
-                  subtitle: 'Lunes 20',
                   loadNextPage: () =>
                       context.read<MoviesCubit>().loadMoreMoviesNowPlaying(),
                 ),
                 MoviesHorizontalListview(
-                  movies: popularMovies,
+                  movies: upcomingMovies,
                   title: 'Próximamente',
                   loadNextPage: () =>
-                      context.read<MoviesCubit>().loadMoreMoviesNowPlaying(),
+                      context.read<MoviesCubit>().loadMoreMoviesUpcoming(),
                 ),
                 MoviesHorizontalListview(
                   movies: popularMovies,
@@ -42,10 +58,10 @@ class MoviesCategoriesHome extends StatelessWidget {
                       context.read<MoviesCubit>().loadMoreMoviesPopular(),
                 ),
                 MoviesHorizontalListview(
-                  movies: popularMovies,
+                  movies: topRatedMovies,
                   title: 'Mejor calificadas',
                   loadNextPage: () =>
-                      context.read<MoviesCubit>().loadMoreMoviesNowPlaying(),
+                      context.read<MoviesCubit>().loadMoreMoviesTopRated(),
                 ),
               ],
             ),

@@ -10,11 +10,13 @@ class MoviesLoaded extends MoviesState {
   final List<MovieEntity> nowPlayingMovies;
   final List<MovieEntity> popularMovies;
   final List<MovieEntity> topRatedMovies;
+  final List<MovieEntity> upcomingMovies;
 
   MoviesLoaded({
     required this.nowPlayingMovies,
     required this.popularMovies,
     required this.topRatedMovies,
+    required this.upcomingMovies,
   });
 }
 

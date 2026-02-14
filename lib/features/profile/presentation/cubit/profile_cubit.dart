@@ -10,6 +10,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.getProfileUseCase) : super(ProfileInitial());
 
   Future<void> loadProfile(String uid) async {
+    if (state is ProfileLoaded) return;
     emit(ProfileLoading());
     try {
       final profile = await getProfileUseCase(uid);

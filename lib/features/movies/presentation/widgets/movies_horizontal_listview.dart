@@ -7,13 +7,11 @@ class MoviesHorizontalListview extends StatefulWidget {
     super.key,
     required this.movies,
     this.title,
-    this.subtitle,
     this.loadNextPage,
   });
 
   final List<MovieEntity> movies;
   final String? title;
-  final String? subtitle;
   final VoidCallback? loadNextPage;
 
   @override
@@ -49,8 +47,8 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
       height: 350,
       child: Column(
         children: [
-          if (widget.title != null || widget.subtitle != null)
-            _Title(title: widget.title, subtitle: widget.subtitle),
+          if (widget.title != null)
+            _Title(title: widget.title),
           Expanded(
             child: ListView.builder(
               controller: scrollController,
@@ -67,28 +65,20 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
 }
 
 class _Title extends StatelessWidget {
-  const _Title({this.title, this.subtitle});
+  const _Title({this.title});
 
   final String? title;
-  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {
     final titleStyle = Theme.of(context).textTheme.titleLarge;
     return Container(
       padding: const EdgeInsets.only(top: 10.0),
-      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null) Text(title!, style: titleStyle),
-          Spacer(),
-          if (subtitle != null)
-            FilledButton.tonal(
-              style: ButtonStyle(visualDensity: VisualDensity.compact),
-              child: Text(subtitle!),
-              onPressed: () {},
-            ),
         ],
       ),
     );
