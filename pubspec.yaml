@@ -23,6 +23,7 @@ dependencies:
   shared_preferences: ^2.5.4
   intl: ^0.20.2
   flutter_dotenv: ^6.0.0
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +38,7 @@ flutter:
 
   assets:
     - .env
+    - assets/images/
 
 flutter_intl:
   enabled: true
