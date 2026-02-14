@@ -6,7 +6,7 @@ class GetPopularMoviesUseCase {
 
   GetPopularMoviesUseCase(this.repository);
 
-  Future<List<MovieEntity>> call() {
-    return repository.getPopularMovies();
+  Future<List<MovieEntity>> call(int page) {
+    return repository.getPopularMovies(page);
   }
 }

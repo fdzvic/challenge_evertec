@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:challenge_evertec/core/config/locale_services.dart';
 import 'package:challenge_evertec/core/error/exceptions/network_exceptions.dart';
 import 'package:http/http.dart' as http;
@@ -9,17 +10,24 @@ class HttpClientService {
 
   HttpClientService(this.localeService);
 
-  Future<Map<String, dynamic>> get(String endpoint) async {
-    final language = localeService.currentLanguageCode;
+  Future<Map<String, dynamic>> get(
+    String endpoint, {
+    Map<String, String>? query,
+  }) async {
+    final params = {
+      'api_key': AppConfig.apiKey,
+      'language': localeService.currentLanguageCode,
+      ...?query,
+    };
 
-    final url = Uri.parse(
-      '${AppConfig.baseUrl}$endpoint'
-      '?api_key=${AppConfig.apiKey}'
-      '&language=$language',
-    );
+    final uri = Uri.parse(
+      '${AppConfig.baseUrl}$endpoint',
+    ).replace(queryParameters: params);
+
+    log(uri.toString());
 
     try {
-      final response = await http.get(url);
+      final response = await http.get(uri);
 
       final decoded = jsonDecode(response.body);
 
@@ -27,7 +35,7 @@ class HttpClientService {
         return decoded;
       }
 
-      throw NetworkException(decoded['status_message'] ?? 'Error');
+      throw NetworkException(decoded['status_message'] ?? 'Server error');
     } catch (e) {
       throw NetworkException('No internet connection');
     }

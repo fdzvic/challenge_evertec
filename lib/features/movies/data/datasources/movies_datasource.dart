@@ -4,7 +4,7 @@ import 'package:challenge_evertec/core/network/http_client_service.dart';
 import '../models/movie_model.dart';
 
 abstract class MoviesDataSource {
-  Future<List<MovieModel>> getPopularMovies();
+  Future<List<MovieModel>> getPopularMovies(int page);
 }
 
 class MoviesDataSourceImpl implements MoviesDataSource {
@@ -13,14 +13,16 @@ class MoviesDataSourceImpl implements MoviesDataSource {
   MoviesDataSourceImpl(this.client);
 
   @override
-  Future<List<MovieModel>> getPopularMovies() async {
-    final response = await client.get('/movie/popular');
+  Future<List<MovieModel>> getPopularMovies(int page) async {
+    final response = await client.get(
+      '/movie/popular',
+      query: {'page': page.toString()},
+    );
+
     log(response.toString());
 
     final results = response['results'] as List;
 
-    return results
-        .map((movie) => MovieModel.fromJson(movie))
-        .toList();
+    return results.map((movie) => MovieModel.fromJson(movie)).toList();
   }
 }

@@ -3,12 +3,12 @@ import '../../domain/entities/movie_entity.dart';
 import '../../domain/repositories/movies_repository.dart';
 
 class MoviesRepositoryImpl implements MoviesRepository {
-  final MoviesDataSource remote;
+  final MoviesDataSource movies;
 
-  MoviesRepositoryImpl(this.remote);
+  MoviesRepositoryImpl(this.movies);
 
   @override
-  Future<List<MovieEntity>> getPopularMovies() {
-    return remote.getPopularMovies();
+  Future<List<MovieEntity>> getPopularMovies(int page) {
+    return movies.getPopularMovies(page);
   }
 }
