@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:challenge_evertec/core/network/http_client_service.dart';
+import 'package:challenge_evertec/features/movies/data/models/movie_details_model.dart';
 import '../models/movie_model.dart';
 
 abstract class MoviesDataSource {
@@ -8,6 +9,7 @@ abstract class MoviesDataSource {
   Future<List<MovieModel>> getNowPlayingMovies(int page);
   Future<List<MovieModel>> getTopRatedMovies(int page);
   Future<List<MovieModel>> getUpcomingMovies(int page);
+  Future<MovieDetailModel> getMovieById(String id);
 }
 
 class MoviesDataSourceImpl implements MoviesDataSource {
@@ -55,5 +57,14 @@ class MoviesDataSourceImpl implements MoviesDataSource {
       query: {'page': page.toString()},
     );
     return _jsonToMovies(response);
+  }
+
+  @override
+  Future<MovieDetailModel> getMovieById(String id) async {
+    final response = await client.get('/movie/$id');
+    if (response['id'] == null) {
+      throw Exception('Movie not found');
+    }
+    return MovieDetailModel.fromJson(response);
   }
 }

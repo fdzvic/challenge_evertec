@@ -1,7 +1,6 @@
 class NetworkException implements Exception {
-  final String message;
-
   NetworkException(this.message);
+  final String message;
 
   @override
   String toString() => message;

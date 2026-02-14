@@ -1,4 +1,5 @@
 import 'package:challenge_evertec/features/movies/data/datasources/movies_datasource.dart';
+import 'package:challenge_evertec/features/movies/domain/entities/movie_details_entity.dart';
 import '../../domain/entities/movie_entity.dart';
 import '../../domain/repositories/movies_repository.dart';
 
@@ -25,5 +26,10 @@ class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<List<MovieEntity>> getUpcomingMovies(int page) {
     return movies.getUpcomingMovies(page);
+  }
+
+  @override
+  Future<MovieDetailsEntity> getMovieById(String id) {
+    return movies.getMovieById(id);
   }
 }

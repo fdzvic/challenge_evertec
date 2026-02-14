@@ -1,7 +1,7 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:challenge_evertec/features/auth/presentation/cubit/auth_state.dart';
-import 'package:challenge_evertec/features/movies/presentation/cubit/movies_cubit.dart';
+import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movies_cubit.dart';
 import 'package:challenge_evertec/features/movies/presentation/pages/movies_page.dart';
 import 'package:challenge_evertec/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:challenge_evertec/features/profile/presentation/pages/profile_page.dart';

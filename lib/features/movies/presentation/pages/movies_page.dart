@@ -1,8 +1,8 @@
 import 'package:challenge_evertec/features/movies/presentation/widgets/movies_categories_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/movies_cubit.dart';
-import '../cubit/movies_state.dart';
+import '../cubit/movies/movies_cubit.dart';
+import '../cubit/movies/movies_state.dart';
 
 class MoviesPage extends StatelessWidget {
   const MoviesPage({super.key});

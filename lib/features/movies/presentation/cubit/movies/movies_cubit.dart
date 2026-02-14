@@ -3,7 +3,7 @@ import 'package:challenge_evertec/features/movies/domain/usecases/get_now_playin
 import 'package:challenge_evertec/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:challenge_evertec/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:challenge_evertec/features/movies/domain/usecases/get_upcoming_movies_usecase.dart';
-import 'package:challenge_evertec/features/movies/presentation/cubit/movies_state.dart';
+import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movies_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MoviesCubit extends Cubit<MoviesState> {

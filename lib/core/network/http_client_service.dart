@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:challenge_evertec/core/config/app_config.dart';
 import 'package:challenge_evertec/core/config/locale_services.dart';
 import 'package:challenge_evertec/core/error/exceptions/network_exceptions.dart';
 import 'package:http/http.dart' as http;
-import '../config/app_config.dart';
+
 
 class HttpClientService {
-  final LocaleService localeService;
-
   HttpClientService(this.localeService);
+  final LocaleService localeService;
 
   Future<Map<String, dynamic>> get(
     String endpoint, {

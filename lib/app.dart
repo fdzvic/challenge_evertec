@@ -1,10 +1,10 @@
+import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/core/router/app_router.dart';
+import 'package:challenge_evertec/core/theme/theme.dart';
+import 'package:challenge_evertec/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:challenge_evertec/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'core/di/service_locator.dart';
-import 'core/theme/theme.dart';
-import 'features/auth/auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatefulWidget {

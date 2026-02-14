@@ -1,10 +1,10 @@
+import 'package:challenge_evertec/core/utils/design/design.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
+import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movies_cubit.dart';
 import 'package:challenge_evertec/features/movies/presentation/widgets/movies_horizontal_listview.dart';
 import 'package:challenge_evertec/features/movies/presentation/widgets/movies_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/design/molecules/molecules.dart';
-import '../cubit/movies_cubit.dart';
 
 class MoviesCategoriesHome extends StatelessWidget {
   const MoviesCategoriesHome({
