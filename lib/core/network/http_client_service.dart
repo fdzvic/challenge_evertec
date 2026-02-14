@@ -1,13 +1,21 @@
 import 'dart:convert';
+import 'package:challenge_evertec/core/config/locale_services.dart';
 import 'package:challenge_evertec/core/error/exceptions/network_exceptions.dart';
 import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
 
 class HttpClientService {
+  final LocaleService localeService;
+
+  HttpClientService(this.localeService);
+
   Future<Map<String, dynamic>> get(String endpoint) async {
+    final language = localeService.currentLanguageCode;
 
     final url = Uri.parse(
-      '${AppConfig.baseUrl}$endpoint?api_key=${AppConfig.apiKey}',
+      '${AppConfig.baseUrl}$endpoint'
+      '?api_key=${AppConfig.apiKey}'
+      '&language=$language',
     );
 
     try {

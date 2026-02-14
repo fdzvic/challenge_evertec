@@ -1,5 +1,11 @@
+import 'package:challenge_evertec/core/config/locale_services.dart';
 import 'package:challenge_evertec/core/network/http_client_service.dart';
 import 'package:challenge_evertec/core/storage/local_storage_service.dart';
+import 'package:challenge_evertec/features/movies/data/datasources/movies_datasource.dart';
+import 'package:challenge_evertec/features/movies/data/repositories/movies_repository_impl.dart';
+import 'package:challenge_evertec/features/movies/domain/repositories/movies_repository.dart';
+import 'package:challenge_evertec/features/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:challenge_evertec/features/movies/presentation/cubit/movies_cubit.dart';
 import 'package:challenge_evertec/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:challenge_evertec/features/profile/domain/repositories/profile_repository.dart';
 import 'package:challenge_evertec/features/profile/domain/usecases/get_profile_usecase.dart';
@@ -72,6 +78,21 @@ Future<void> serviceLocatorInit() async {
   // Cubit
   getIt.registerFactory(() => ProfileCubit(getIt()));
 
-  // Network
-  getIt.registerLazySingleton(() => HttpClientService());
+  /// Network
+  getIt.registerLazySingleton(() => HttpClientService(getIt()));
+  getIt.registerLazySingleton(() => LocaleService());
+
+  /// Movies
+
+  getIt.registerLazySingleton<MoviesDataSource>(
+    () => MoviesDataSourceImpl(getIt()),
+  );
+
+  getIt.registerLazySingleton<MoviesRepository>(
+    () => MoviesRepositoryImpl(getIt()),
+  );
+
+  getIt.registerLazySingleton(() => GetPopularMoviesUseCase(getIt()));
+
+  getIt.registerFactory(() => MoviesCubit(getIt()));
 }
