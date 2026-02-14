@@ -1,7 +1,7 @@
+import 'package:challenge_evertec/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/home_tab.dart';
 import '../widgets/favorites_tab.dart';
-import '../widgets/profile_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _tabs = const [
     HomeTab(),
     FavoritesTab(),
-    ProfileTab(),
+    ProfilePage(),
   ];
 
   @override

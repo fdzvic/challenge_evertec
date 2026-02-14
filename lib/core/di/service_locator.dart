@@ -1,9 +1,13 @@
 import 'package:challenge_evertec/core/storage/local_storage_service.dart';
+import 'package:challenge_evertec/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:challenge_evertec/features/profile/domain/repositories/profile_repository.dart';
+import 'package:challenge_evertec/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../features/auth/auth.dart';
+import '../../features/profile/presentation/cubit/profile_cubit.dart';
 import '../theme/theme.dart';
 
 final getIt = GetIt.instance;
@@ -23,33 +27,30 @@ Future<void> serviceLocatorInit() async {
   );
   getIt.registerLazySingleton<ThemeCubit>(() => ThemeCubit(getIt()));
 
-  // authentication
+  /// authentication
+
   // FirebaseAuth
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   // FirebaseFirestore
   getIt.registerLazySingleton<FirebaseFirestore>(
     () => FirebaseFirestore.instance,
   );
-
   // DataSource
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(getIt()),
   );
-
   // Repository
   getIt.registerLazySingleton<AuthRepository>(
-  () => AuthRepositoryImpl(
-    getIt<AuthRemoteDataSource>(),
-    getIt<FirebaseFirestore>(),
-  ),
-);
-
+    () => AuthRepositoryImpl(
+      getIt<AuthRemoteDataSource>(),
+      getIt<FirebaseFirestore>(),
+    ),
+  );
   // UseCases
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
   getIt.registerLazySingleton(() => RegisterUseCase(getIt()));
   getIt.registerLazySingleton(() => LogoutUseCase(getIt()));
   getIt.registerLazySingleton(() => GetCurrentUserUseCase(getIt()));
-
   // Cubit
   getIt.registerLazySingleton(
     () => AuthCubit(
@@ -59,4 +60,14 @@ Future<void> serviceLocatorInit() async {
       getCurrentUserUseCase: getIt(),
     ),
   );
+
+  /// Profile
+  // DataSource
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(getIt()),
+  );
+  // UseCases
+  getIt.registerLazySingleton(() => GetProfileUseCase(getIt()));
+  // Cubit
+  getIt.registerFactory(() => ProfileCubit(getIt()));
 }

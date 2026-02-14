@@ -58,8 +58,6 @@ class AuthCubit extends Cubit<AuthState> {
         phone: phone,
       );
 
-      print("UID FROM AUTH: ${user.id}");
-
       emit(AuthAuthenticated(user));
     } on FirebaseAuthException catch (e) {
       final message = AuthExceptionMapper.map(e);
