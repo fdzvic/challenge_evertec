@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FavoritesTab extends StatelessWidget {
-  const FavoritesTab({super.key});
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+     return const Scaffold(
       body: Center(
         child: Text(
           'Favoritos',
