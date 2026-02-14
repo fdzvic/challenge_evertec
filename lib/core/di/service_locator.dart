@@ -6,6 +6,7 @@ import 'package:challenge_evertec/features/movies/data/repositories/movies_repos
 import 'package:challenge_evertec/features/movies/domain/repositories/movies_repository.dart';
 import 'package:challenge_evertec/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:challenge_evertec/features/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:challenge_evertec/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:challenge_evertec/features/movies/presentation/cubit/movies_cubit.dart';
 import 'package:challenge_evertec/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:challenge_evertec/features/profile/domain/repositories/profile_repository.dart';
@@ -95,11 +96,13 @@ Future<void> serviceLocatorInit() async {
 
   getIt.registerLazySingleton(() => GetPopularMoviesUseCase(getIt()));
   getIt.registerLazySingleton(() => GetNowPlayingMoviesUseCase(getIt()));
+  getIt.registerLazySingleton(() => GetTopRatedMoviesUseCase(getIt()));
 
   getIt.registerFactory(
     () => MoviesCubit(
-      getIt<GetPopularMoviesUseCase>(),
-      getIt<GetNowPlayingMoviesUseCase>(),
+      getPopularMovies: getIt<GetPopularMoviesUseCase>(),
+      getNowPlayingMovies: getIt<GetNowPlayingMoviesUseCase>(),
+      getTopRatedMovies: getIt<GetTopRatedMoviesUseCase>(),
     ),
   );
 }

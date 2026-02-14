@@ -9,8 +9,13 @@ class MoviesLoading extends MoviesState {}
 class MoviesLoaded extends MoviesState {
   final List<MovieEntity> nowPlayingMovies;
   final List<MovieEntity> popularMovies;
+  final List<MovieEntity> topRatedMovies;
 
-  MoviesLoaded(this.nowPlayingMovies, this.popularMovies);
+  MoviesLoaded({
+    required this.nowPlayingMovies,
+    required this.popularMovies,
+    required this.topRatedMovies,
+  });
 }
 
 class MoviesError extends MoviesState {
