@@ -1,10 +1,7 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/features/auth/auth.dart';
-import 'package:challenge_evertec/features/favorites/presentation/pages/favorite_page.dart';
 import 'package:challenge_evertec/features/home/presentation/pages/home_page.dart';
 import 'package:challenge_evertec/features/movies/presentation/pages/movie_details_page.dart';
-import 'package:challenge_evertec/features/movies/presentation/pages/movies_page.dart';
-import 'package:challenge_evertec/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,23 +19,15 @@ class AppRouter {
         path: '/register',
         builder: (context, state) => const RegisterPage(),
       ),
-      ShellRoute(
-        builder: (context, state, child) {
-          return HomePage(childView: child);
+      GoRoute(
+        path: '/home/:page',
+        name: HomePage.name,
+        builder: (context, state) {
+          final pageIndex =
+              int.tryParse(state.pathParameters['page'] ?? '0') ?? 0;
+          return HomePage(pageIndex: pageIndex);
         },
         routes: [
-          GoRoute(
-            path: '/home',
-            builder: (context, state) => const MoviesPage(),
-          ),
-          GoRoute(
-            path: '/favorites',
-            builder: (context, state) => const FavoritePage(),
-          ),
-          GoRoute(
-            path: '/profile',
-            builder: (context, state) => const ProfilePage(),
-          ),
           GoRoute(
             path: '/movie/:id',
             builder: (context, state) {
@@ -60,7 +49,7 @@ class AppRouter {
       AuthInitial() => isSplash ? null : '/splash',
       AuthLoading() => null,
       AuthUnauthenticated() || AuthError() => isAuthRoute ? null : '/login',
-      AuthAuthenticated() => isAuthRoute || isSplash ? '/home' : null,
+      AuthAuthenticated() => isAuthRoute || isSplash ? '/home/0' : null,
       _ => null,
     };
   }

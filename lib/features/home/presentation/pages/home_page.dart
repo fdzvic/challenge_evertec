@@ -10,16 +10,18 @@ import 'package:challenge_evertec/features/profile/presentation/pages/profile_pa
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.childView});
+class HomePage extends StatelessWidget {
+  HomePage({super.key, required this.pageIndex});
 
-  final Widget childView;
+  static const String name = 'home-page';
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+  final int pageIndex;
 
-class _HomePageState extends State<HomePage> {
+  final viewRoutes = [
+    const MoviesPage(),
+    const FavoritePage(),
+    const ProfilePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         body: Center(child: Text('Usuario no autenticado')),
       );
     }
-    
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<MoviesCubit>()..loadInitialMovies()),
@@ -38,12 +40,13 @@ class _HomePageState extends State<HomePage> {
           create: (_) => getIt<ProfileCubit>()..loadProfile(authState.user.id),
         ),
       ],
-     
       child: Scaffold(
-        body: widget.childView,
-        bottomNavigationBar: const CustomBottonNavigatorBar(),
+        body: IndexedStack(
+          index: pageIndex,
+          children: viewRoutes,
+        ),
+        bottomNavigationBar:  CustomBottonNavigatorBar(currentIndex: pageIndex,),
       ),
     );
   }
 }
-
