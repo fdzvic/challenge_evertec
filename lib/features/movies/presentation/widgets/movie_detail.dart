@@ -41,11 +41,63 @@ class _Details extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(movie.overview, style: const TextStyle(fontSize: 16)),
-          const SizedBox(height: 10),
-          Text('Release Date: ${movie.releaseDate.toLocal()}'),
-          const SizedBox(height: 10),
-          Text('Rating: ${movie.voteAverage}'),
+          Padding(
+            padding: const EdgeInsetsGeometry.all(8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    movie.posterPath,
+                    width: size.width * 0.3,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: (size.width - 40) * 0.6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        movie.title,
+                        style: textStyle.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Release Date: ${movie.releaseDate.toIso8601String().split('T').first}',
+                        style: textStyle.bodyMedium,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(movie.overview, style: textStyle.bodyMedium),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Wrap(
+              children: [
+                ...movie.genres.map(
+                  (genre) => Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: Chip(
+                      label: Text(genre.name),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 100),
         ],
       ),
     );
