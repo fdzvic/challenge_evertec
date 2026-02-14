@@ -36,7 +36,7 @@ class _EvInputState extends State<EvInput> {
       setState(() {});
     });
 
-    Future.delayed(Duration.zero, () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _defineObscureTextValue();
     });
   }
