@@ -1,4 +1,4 @@
-import '../../domain/entities/movie_entity.dart';
+import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
 
 class MovieModel extends MovieEntity {
   MovieModel({

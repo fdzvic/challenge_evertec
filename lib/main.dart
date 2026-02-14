@@ -3,7 +3,7 @@ import 'package:challenge_evertec/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'core/di/service_locator.dart' as di;
+import 'package:challenge_evertec/core/di/service_locator.dart' as di;
 
 
 void main() async {

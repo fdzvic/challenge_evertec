@@ -1,20 +1,4 @@
 class MovieEntity {
-  final int id;
-  final String title;
-  final String overview;
-  final String posterPath;
-  final double rating;
-  final String backdropPath;
-  final bool adult;
-  final List<int> genreIds;
-  final String originalLanguage;
-  final String originalTitle;
-  final double popularity;
-  final DateTime releaseDate;
-  final bool video;
-  final double voteAverage;
-  final int voteCount;
-
   MovieEntity({
     required this.id,
     required this.title,
@@ -32,4 +16,19 @@ class MovieEntity {
     required this.voteAverage,
     required this.voteCount,
   });
+  final int id;
+  final String title;
+  final String overview;
+  final String posterPath;
+  final double rating;
+  final String backdropPath;
+  final bool adult;
+  final List<int> genreIds;
+  final String originalLanguage;
+  final String originalTitle;
+  final double popularity;
+  final DateTime releaseDate;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
 }

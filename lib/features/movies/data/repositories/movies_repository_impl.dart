@@ -1,12 +1,11 @@
 import 'package:challenge_evertec/features/movies/data/datasources/movies_datasource.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_details_entity.dart';
-import '../../domain/entities/movie_entity.dart';
-import '../../domain/repositories/movies_repository.dart';
+import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
+import 'package:challenge_evertec/features/movies/domain/repositories/movies_repository.dart';
 
 class MoviesRepositoryImpl implements MoviesRepository {
-  final MoviesDataSource movies;
-
   MoviesRepositoryImpl(this.movies);
+  final MoviesDataSource movies;
 
   @override
   Future<List<MovieEntity>> getPopularMovies(int page) {

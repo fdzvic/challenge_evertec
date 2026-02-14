@@ -1,10 +1,4 @@
 class ProfileEntity {
-  final String id;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
-
   ProfileEntity({
     required this.id,
     required this.firstName,
@@ -12,4 +6,9 @@ class ProfileEntity {
     required this.email,
     required this.phone,
   });
+  final String id;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phone;
 }

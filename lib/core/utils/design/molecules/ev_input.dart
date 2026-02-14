@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 enum InputValueType { email, phone, password, name, text }
 
 class EvInput extends StatefulWidget {
-  final TextEditingController controller;
-  final String label;
-  final InputValueType inputValueType;
-  final String? matchValue;
-
   const EvInput({
     super.key,
     required this.controller,
     required this.label,
-
     this.inputValueType = InputValueType.text,
     this.matchValue,
   });
+  final TextEditingController controller;
+  final String label;
+  final InputValueType inputValueType;
+  final String? matchValue;
 
   @override
   State<EvInput> createState() => _EvInputState();

@@ -1,5 +1,5 @@
 import 'package:challenge_evertec/features/movies/domain/entities/movie_details_entity.dart';
-import '../entities/movie_entity.dart';
+import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
 
 abstract class MoviesRepository {
   Future<List<MovieEntity>> getPopularMovies(int page);

@@ -1,4 +1,4 @@
-import '../../domain/entities/user_entity.dart';
+import 'package:challenge_evertec/features/auth/domain/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel extends UserEntity {

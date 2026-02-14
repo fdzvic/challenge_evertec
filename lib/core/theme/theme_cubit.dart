@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  final ThemeLocalDataSource localDataSource;
 
   ThemeCubit(this.localDataSource)
       : super(const ThemeState(themeMode: ThemeMode.system));
+  final ThemeLocalDataSource localDataSource;
 
   Future<void> setDarkMode() async {
     await localDataSource.saveTheme('dark');

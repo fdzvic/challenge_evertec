@@ -9,9 +9,9 @@ abstract class LocalStorageService {
 }
 
 class LocalStorageServiceImpl implements LocalStorageService {
-  final SharedPreferences prefs;
 
   LocalStorageServiceImpl(this.prefs);
+  final SharedPreferences prefs;
 
   @override
   Future<void> setString(String key, String value) async {

@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/user_model.dart';
+import 'package:challenge_evertec/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
@@ -9,9 +9,9 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final FirebaseAuth firebaseAuth;
 
   AuthRemoteDataSourceImpl(this.firebaseAuth);
+  final FirebaseAuth firebaseAuth;
 
   @override
   Future<UserModel> login(String email, String password) async {

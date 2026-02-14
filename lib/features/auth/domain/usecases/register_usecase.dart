@@ -1,10 +1,10 @@
-import '../entities/user_entity.dart';
-import '../repositories/auth_repository.dart';
+import 'package:challenge_evertec/features/auth/domain/entities/user_entity.dart';
+import 'package:challenge_evertec/features/auth/domain/repositories/auth_repository.dart';
 
 class RegisterUseCase {
-  final AuthRepository repository;
 
   RegisterUseCase(this.repository);
+  final AuthRepository repository;
 
   Future<UserEntity> call({
     required String email,

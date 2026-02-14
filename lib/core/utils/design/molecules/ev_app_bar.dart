@@ -19,13 +19,13 @@ class EvAppBar extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Text(
               title,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Spacer(),
-            IconButton(onPressed: onSearchPressed ?? (() {}), icon: Icon(Icons.search),),
+            const Spacer(),
+            IconButton(onPressed: onSearchPressed ?? (() {}), icon: const Icon(Icons.search),),
           ],
         ),
       ),

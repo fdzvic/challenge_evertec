@@ -36,7 +36,7 @@ void main() {
     build: () {
       when(
         () => mockLogin('test@mail.com', '123456'),
-      ).thenAnswer((_) async => UserEntity(id: '1', email: 'test@mail.com'));
+      ).thenAnswer((_) async => const UserEntity(id: '1', email: 'test@mail.com'));
       return cubit;
     },
     act: (cubit) => cubit.login('test@mail.com', '123456'),
@@ -57,7 +57,7 @@ void main() {
     build: () {
       when(
         () => mockGetUser(),
-      ).thenAnswer((_) async => UserEntity(id: '1', email: 'test@mail.com'));
+      ).thenAnswer((_) async => const UserEntity(id: '1', email: 'test@mail.com'));
       return cubit;
     },
     act: (cubit) => cubit.checkAuthStatus(),

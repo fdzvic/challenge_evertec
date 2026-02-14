@@ -2,8 +2,8 @@ import 'package:challenge_evertec/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/utils/design/design.dart';
-import '../../auth.dart';
+import 'package:challenge_evertec/core/utils/design/design.dart';
+import 'package:challenge_evertec/features/auth/auth.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});

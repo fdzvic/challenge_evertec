@@ -3,9 +3,9 @@ import 'package:challenge_evertec/features/movies/presentation/cubit/movie_detai
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailCubit extends Cubit<MovieDetailState> {
-  final GetMovieByIdUsecase getMovieById;
 
   MovieDetailCubit(this.getMovieById) : super(MovieDetailInitial());
+  final GetMovieByIdUsecase getMovieById;
 
   Future<void> loadMovieDetails(String id) async {
     if (state is MovieDetailLoaded) return;

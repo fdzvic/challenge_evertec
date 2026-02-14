@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 class EvButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool isLoading;
 
   const EvButton({
     super.key,
@@ -11,6 +8,9 @@ class EvButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
   });
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {

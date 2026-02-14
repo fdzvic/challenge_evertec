@@ -5,14 +5,13 @@ abstract class MovieDetailState {}
 class MovieDetailInitial extends MovieDetailState {}
 
 class MovieDetailLoading extends MovieDetailState {}
-class MovieDetailLoaded extends MovieDetailState {
-  final MovieDetailsEntity movie;
 
+class MovieDetailLoaded extends MovieDetailState {
   MovieDetailLoaded(this.movie);
+  final MovieDetailsEntity movie;
 }
 
 class MovieDetailError extends MovieDetailState {
-  final String message;
-
   MovieDetailError(this.message);
+  final String message;
 }

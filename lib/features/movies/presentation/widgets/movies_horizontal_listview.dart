@@ -109,8 +109,8 @@ class _Slide extends StatelessWidget {
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress != null) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Center(
                         child: CircularProgressIndicator(strokeWidth: 2),
                       ),
@@ -132,7 +132,7 @@ class _Slide extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           SizedBox(
             width: 150,
             child: Text(
@@ -146,8 +146,8 @@ class _Slide extends StatelessWidget {
             width: 150,
             child: Row(
               children: [
-                Icon(Icons.star, color: Colors.amber, size: 16),
-                SizedBox(width: 4),
+                const Icon(Icons.star, color: Colors.amber, size: 16),
+                const SizedBox(width: 4),
                 Text(
                   movie.voteAverage.toStringAsFixed(1),
                   style: textStyle.bodyMedium?.copyWith(
@@ -155,7 +155,7 @@ class _Slide extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   '(${HumanFormats.numberFromString(movie.popularity)})',
                   style: textStyle.bodyMedium?.copyWith(color: Colors.grey),

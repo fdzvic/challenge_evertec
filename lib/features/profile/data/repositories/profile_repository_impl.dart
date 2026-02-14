@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/profile_entity.dart';
-import '../../domain/repositories/profile_repository.dart';
+import 'package:challenge_evertec/features/profile/domain/entities/profile_entity.dart';
+import 'package:challenge_evertec/features/profile/domain/repositories/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
-  final FirebaseFirestore firestore;
-
   ProfileRepositoryImpl(this.firestore);
+  final FirebaseFirestore firestore;
 
   @override
   Future<ProfileEntity> getProfile(String uid) async {

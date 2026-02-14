@@ -17,7 +17,7 @@ String? validateEmail(String email, {String? matchValue}) {
 
 String? validatePassword(String input, {String? matchValue}) {
   if (matchValue != null) {
-    return input.isEmpty && matchValue != ""
+    return input.isEmpty && matchValue != ''
         ? 'Este campo es obligatorio'
         : input.isEmpty
         ? ''
@@ -38,8 +38,8 @@ String? validateName(String input, {String? matchValue}) {
   if (input.isEmpty) {
     return 'Este campo es obligatorio';
   } else {
-    String pattern = r'^[a-zA-Z\s]*$';
-    RegExp regExp = RegExp(pattern);
+    final String pattern = r'^[a-zA-Z\s]*$';
+    final RegExp regExp = RegExp(pattern);
     if (!regExp.hasMatch(input)) {
       return 'Ingresa un nombre válido';
     }

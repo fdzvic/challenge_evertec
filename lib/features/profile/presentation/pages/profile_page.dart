@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/theme/theme.dart';
-import '../../../auth/auth.dart';
-import '../cubit/profile_cubit.dart';
+import 'package:challenge_evertec/core/theme/theme.dart';
+import 'package:challenge_evertec/features/auth/auth.dart';
+import 'package:challenge_evertec/features/profile/presentation/cubit/profile_cubit.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

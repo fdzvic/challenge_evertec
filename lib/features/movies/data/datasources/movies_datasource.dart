@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:challenge_evertec/core/network/http_client_service.dart';
 import 'package:challenge_evertec/features/movies/data/models/movie_details_model.dart';
-import '../models/movie_model.dart';
+import 'package:challenge_evertec/features/movies/data/models/movie_model.dart';
 
 abstract class MoviesDataSource {
   Future<List<MovieModel>> getPopularMovies(int page);
@@ -13,9 +13,8 @@ abstract class MoviesDataSource {
 }
 
 class MoviesDataSourceImpl implements MoviesDataSource {
-  final HttpClientService client;
-
   MoviesDataSourceImpl(this.client);
+  final HttpClientService client;
 
   List<MovieModel> _jsonToMovies(Map<String, dynamic> json) {
     log(json.toString());

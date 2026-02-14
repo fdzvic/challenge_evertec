@@ -2,20 +2,20 @@ import 'package:challenge_evertec/core/error/exceptions/auth_exception_mapper.da
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../auth.dart';
+import 'package:challenge_evertec/features/auth/auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final LoginUseCase loginUseCase;
-  final RegisterUseCase registerUseCase;
-  final LogoutUseCase logoutUseCase;
-  final GetCurrentUserUseCase getCurrentUserUseCase;
-
   AuthCubit({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.logoutUseCase,
     required this.getCurrentUserUseCase,
   }) : super(AuthInitial());
+
+  final LoginUseCase loginUseCase;
+  final RegisterUseCase registerUseCase;
+  final LogoutUseCase logoutUseCase;
+  final GetCurrentUserUseCase getCurrentUserUseCase;
 
   Future<void> checkAuthStatus() async {
     final user = await getCurrentUserUseCase();
@@ -36,7 +36,7 @@ class AuthCubit extends Cubit<AuthState> {
       final message = AuthExceptionMapper.map(e);
       emit(AuthError(message));
     } catch (_) {
-      emit(AuthError('Ocurrió un error inesperado.'));
+      emit(const AuthError('Ocurrió un error inesperado.'));
     }
   }
 
@@ -62,7 +62,7 @@ class AuthCubit extends Cubit<AuthState> {
     } on FirebaseAuthException catch (e) {
       final message = AuthExceptionMapper.map(e);
       emit(AuthError(message));
-    }catch (e) {
+    } catch (e) {
       emit(const AuthError('Error al registrar usuario.'));
     }
   }

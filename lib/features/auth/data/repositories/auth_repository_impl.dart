@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../domain/entities/user_entity.dart';
-import '../../domain/repositories/auth_repository.dart';
-import '../datasources/auth_remote_datasource.dart';
+import 'package:challenge_evertec/features/auth/domain/entities/user_entity.dart';
+import 'package:challenge_evertec/features/auth/domain/repositories/auth_repository.dart';
+import 'package:challenge_evertec/features/auth/data/datasources/auth_remote_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource remoteDataSource;
-  final FirebaseFirestore firestore;
 
   AuthRepositoryImpl(this.remoteDataSource, this.firestore);
+  final AuthRemoteDataSource remoteDataSource;
+  final FirebaseFirestore firestore;
 
   @override
   Future<UserEntity> login(String email, String password) {

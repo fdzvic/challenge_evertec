@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../domain/entities/user_entity.dart';
+import 'package:challenge_evertec/features/auth/domain/entities/user_entity.dart';
 
 abstract class AuthState extends Equatable {
   const AuthState();
@@ -13,9 +13,8 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthAuthenticated extends AuthState {
-  final UserEntity user;
-
   const AuthAuthenticated(this.user);
+  final UserEntity user;
 
   @override
   List<Object?> get props => [user];
@@ -24,9 +23,8 @@ class AuthAuthenticated extends AuthState {
 class AuthUnauthenticated extends AuthState {}
 
 class AuthError extends AuthState {
-  final String message;
-
   const AuthError(this.message);
+  final String message;
 
   @override
   List<Object?> get props => [message];

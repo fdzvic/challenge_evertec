@@ -7,17 +7,16 @@ import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movi
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MoviesCubit extends Cubit<MoviesState> {
-  final GetPopularMoviesUseCase getPopularMovies;
-  final GetNowPlayingMoviesUseCase getNowPlayingMovies;
-  final GetTopRatedMoviesUseCase getTopRatedMovies;
-  final GetUpcomingMoviesUseCase getUpcomingMovies;
-
   MoviesCubit({
     required this.getPopularMovies,
     required this.getNowPlayingMovies,
     required this.getTopRatedMovies,
     required this.getUpcomingMovies,
   }) : super(MoviesInitial());
+  final GetPopularMoviesUseCase getPopularMovies;
+  final GetNowPlayingMoviesUseCase getNowPlayingMovies;
+  final GetTopRatedMoviesUseCase getTopRatedMovies;
+  final GetUpcomingMoviesUseCase getUpcomingMovies;
 
   int _popularPage = 1;
   int _nowPlayingPage = 1;
@@ -30,12 +29,12 @@ class MoviesCubit extends Cubit<MoviesState> {
   final List<MovieEntity> _nowPlayingMovies = [];
   final List<MovieEntity> _popularMovies = [];
   final List<MovieEntity> _topRatedMovies = [];
-   final List<MovieEntity> _upcomingMovies = [];
+  final List<MovieEntity> _upcomingMovies = [];
 
   Future<void> loadInitialMovies() async {
     if (state is MoviesLoaded) return;
     emit(MoviesLoading());
-    
+
     try {
       final popularMovies = await getPopularMovies(1);
       final nowPlayingMovies = await getNowPlayingMovies(1);

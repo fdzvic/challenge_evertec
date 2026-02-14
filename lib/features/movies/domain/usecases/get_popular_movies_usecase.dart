@@ -1,10 +1,10 @@
-import '../entities/movie_entity.dart';
-import '../repositories/movies_repository.dart';
+import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
+import 'package:challenge_evertec/features/movies/domain/repositories/movies_repository.dart';
 
 class GetPopularMoviesUseCase {
-  final MoviesRepository repository;
 
   GetPopularMoviesUseCase(this.repository);
+  final MoviesRepository repository;
 
   Future<List<MovieEntity>> call(int page) {
     return repository.getPopularMovies(page);
