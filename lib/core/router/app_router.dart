@@ -1,6 +1,7 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/features/auth/auth.dart';
 import 'package:challenge_evertec/features/home/presentation/pages/home_page.dart';
+import 'package:challenge_evertec/features/movies/presentation/pages/movie_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,21 +20,33 @@ class AppRouter {
         path: '/register',
         builder: (context, state) => const RegisterPage(),
       ),
+      GoRoute(
+        path: '/movie/:id',
+        builder: (context, state) {
+          final movieId = state.pathParameters['id']!;
+          return MovieDetailsPage(movieId: movieId);
+        }
+      ),
     ],
   );
   String? _handleRedirect(BuildContext context, GoRouterState state) {
-    final authState = authCubit.state;
-    final currentRoute = state.matchedLocation;
-    final isAuthRoute = currentRoute == '/login' || currentRoute == '/register';
+  final authState = authCubit.state;
+  final location = state.matchedLocation;
+  final isAuthRoute =
+      location == '/login' || location == '/register';
+  final isSplash = location == '/splash';
 
-    return switch (authState) {
-      AuthInitial() => currentRoute == '/splash' ? null : '/splash',
-      AuthLoading() => null,
-      AuthUnauthenticated() || AuthError() => isAuthRoute ? null : '/login',
-      AuthAuthenticated() => currentRoute == '/home' ? null : '/home',
-      _ => null,
-    };
-  }
+  return switch (authState) {
+    AuthInitial() => isSplash ? null : '/splash',
+    AuthLoading() => null,
+    AuthUnauthenticated() || AuthError() =>
+        isAuthRoute ? null : '/login',
+    AuthAuthenticated() =>
+        isAuthRoute || isSplash ? '/home' : null,
+    _ => null,
+  };
+}
+
 }
 
 class GoRouterRefreshStream extends ChangeNotifier {
