@@ -29,7 +29,6 @@ class MoviesCubit extends Cubit<MoviesState> {
   Future<void> loadMoreMovies() async {
     if (_isLoading) return;
     _isLoading = true;
-
     try {
       _page++;
       final movies = await getPopularMovies(_page);
@@ -38,6 +37,7 @@ class MoviesCubit extends Cubit<MoviesState> {
     } catch (e) {
       emit(MoviesError(e.toString()));
     }
+    await Future.delayed(const Duration(seconds: 1));
     _isLoading = false;
   }
 }

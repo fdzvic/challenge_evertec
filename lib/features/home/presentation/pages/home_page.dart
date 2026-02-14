@@ -1,5 +1,4 @@
 import 'package:challenge_evertec/features/movies/presentation/pages/movies_page.dart';
-import 'package:challenge_evertec/features/movies/presentation/pages/movies_page_x.dart';
 import 'package:challenge_evertec/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/favorites_tab.dart';
@@ -15,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _tabs = const [
-    MoviesPageX(),
+    MoviesPage(),
     FavoritesTab(),
     ProfilePage(),
   ];

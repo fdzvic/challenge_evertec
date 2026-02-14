@@ -2,7 +2,7 @@ import 'package:challenge_evertec/core/utils/helpers/human_formats.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
 
-class MoviesHorizontalListview extends StatelessWidget {
+class MoviesHorizontalListview extends StatefulWidget {
   const MoviesHorizontalListview({
     super.key,
     required this.movies,
@@ -17,19 +17,47 @@ class MoviesHorizontalListview extends StatelessWidget {
   final VoidCallback? loadNextPage;
 
   @override
+  State<MoviesHorizontalListview> createState() => _MoviesHorizontalListviewState();
+}
+
+class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      if(widget.loadNextPage == null) return;
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 200) {
+        widget.loadNextPage?.call();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
       child: Column(
         children: [
-          if (title != null || subtitle != null)
-            _Title(title: title, subtitle: subtitle),
+          if (widget.title != null || widget.subtitle != null)
+            _Title(title: widget.title, subtitle: widget.subtitle),
           Expanded(
             child: ListView.builder(
-              itemCount: movies.length,
+              controller: scrollController,
+              itemCount: widget.movies.length,
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (_, i) => _Slide(movie: movies[i]),
+              itemBuilder: (_, i) => _Slide(movie: widget.movies[i]),
             ),
           ),
         ],
