@@ -1,3 +1,4 @@
+import 'package:challenge_evertec/core/network/http_client_service.dart';
 import 'package:challenge_evertec/core/storage/local_storage_service.dart';
 import 'package:challenge_evertec/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:challenge_evertec/features/profile/domain/repositories/profile_repository.dart';
@@ -70,4 +71,7 @@ Future<void> serviceLocatorInit() async {
   getIt.registerLazySingleton(() => GetProfileUseCase(getIt()));
   // Cubit
   getIt.registerFactory(() => ProfileCubit(getIt()));
+
+  // Network
+  getIt.registerLazySingleton(() => HttpClientService());
 }
