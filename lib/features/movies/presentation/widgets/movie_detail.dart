@@ -1,5 +1,8 @@
+import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_cubit.dart';
+import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_state.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_details_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetail extends StatelessWidget {
   const MovieDetail({super.key, required this.movie});
@@ -117,9 +120,38 @@ class _CustomAppBar extends StatelessWidget {
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.favorite_border_outlined),
+        BlocBuilder<FavoritesCubit, FavoritesState>(
+          buildWhen: (prev, curr) => curr is FavoritesLoaded,
+          builder: (context, state) {
+            bool isFavorite = false;
+
+            if (state is FavoritesLoaded) {
+              isFavorite = state.favorites.any(
+                (fav) => fav.movieId == movie.id,
+              );
+            }
+
+            return IconButton(
+              onPressed: () {
+                context.read<FavoritesCubit>().toggleFavorite(
+                  movieId: movie.id,
+                  title: movie.title,
+                  posterPath: movie.posterPath,
+                  backdropPath: movie.posterPath,
+                  originalTitle: movie.title,
+                  voteAverage: movie.voteAverage,
+                );
+              },
+              icon: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                  key: ValueKey(isFavorite),
+                  color: isFavorite ? Colors.red : Colors.white,
+                ),
+              ),
+            );
+          },
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(

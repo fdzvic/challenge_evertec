@@ -1,6 +1,7 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
 import 'package:challenge_evertec/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:challenge_evertec/features/auth/presentation/cubit/auth_state.dart';
+import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:challenge_evertec/features/favorites/presentation/pages/favorite_page.dart';
 import 'package:challenge_evertec/features/home/presentation/widgets/custom_botton_navigation_bar.dart';
 import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movies_cubit.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
 
   final viewRoutes = [
     const MoviesPage(),
-    const FavoritePage(),
+    const FavoritesPage(),
     const ProfilePage(),
   ];
 
@@ -39,13 +40,11 @@ class HomePage extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<ProfileCubit>()..loadProfile(authState.user.id),
         ),
+        BlocProvider(create: (_) => getIt<FavoritesCubit>()..startListening()),
       ],
       child: Scaffold(
-        body: IndexedStack(
-          index: pageIndex,
-          children: viewRoutes,
-        ),
-        bottomNavigationBar:  CustomBottonNavigatorBar(currentIndex: pageIndex,),
+        body: IndexedStack(index: pageIndex, children: viewRoutes),
+        bottomNavigationBar: CustomBottonNavigatorBar(currentIndex: pageIndex),
       ),
     );
   }

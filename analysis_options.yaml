@@ -40,7 +40,6 @@ linter:
     # 🎨 Estilo consistente
     prefer_single_quotes: true
     require_trailing_commas: true
-    sort_pub_dependencies: true
 
     # 🧠 Buenas prácticas Flutter
     use_build_context_synchronously: true

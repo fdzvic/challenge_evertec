@@ -1,8 +1,16 @@
 import 'package:challenge_evertec/core/config/locale_services.dart';
+import 'package:challenge_evertec/core/database/database.dart';
 import 'package:challenge_evertec/core/network/http_client_service.dart';
 import 'package:challenge_evertec/core/storage/local_storage_service.dart';
 import 'package:challenge_evertec/core/theme/theme.dart';
 import 'package:challenge_evertec/features/auth/auth.dart';
+import 'package:challenge_evertec/features/favorites/data/datasources/favorites_local_datasource.dart';
+import 'package:challenge_evertec/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:challenge_evertec/features/favorites/domain/repositories/favorites_repository.dart';
+import 'package:challenge_evertec/features/favorites/domain/usecases/add_favorite_usecase.dart';
+import 'package:challenge_evertec/features/favorites/domain/usecases/remove_favorite_usecase.dart';
+import 'package:challenge_evertec/features/favorites/domain/usecases/watch_favorites_usecase.dart';
+import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:challenge_evertec/features/movies/data/datasources/movies_datasource.dart';
 import 'package:challenge_evertec/features/movies/data/repositories/movies_repository_impl.dart';
 import 'package:challenge_evertec/features/movies/domain/repositories/movies_repository.dart';
@@ -29,10 +37,31 @@ Future<void> serviceLocatorInit() async {
   final sharedPreferences = await SharedPreferences.getInstance();
 
   getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
-
   getIt.registerLazySingleton<LocalStorageService>(
     () => LocalStorageServiceImpl(getIt()),
   );
+
+  //Database
+
+  getIt.registerLazySingleton<AppDatabase>(() => AppDatabase());
+  getIt.registerLazySingleton<FavoritesLocalDataSource>(
+    () => FavoritesLocalDataSourceImpl(getIt()),
+  );
+  getIt.registerLazySingleton<FavoritesRepository>(
+    () => FavoritesRepositoryImpl(getIt()),
+  );
+
+  getIt.registerLazySingleton(() => AddFavoriteUseCase(getIt()));
+  getIt.registerLazySingleton(() => RemoveFavoriteUseCase(getIt()));
+  getIt.registerLazySingleton(() => WatchFavoritesUseCase(getIt()));
+  getIt.registerFactory(
+    () => FavoritesCubit(
+      addFavorite: getIt<AddFavoriteUseCase>(),
+      removeFavorite: getIt<RemoveFavoriteUseCase>(),
+      watchFavorites: getIt<WatchFavoritesUseCase>(),
+    ),
+  );
+
   // Theme
   getIt.registerLazySingleton<ThemeLocalDataSource>(
     () => ThemeLocalDataSource(getIt()),

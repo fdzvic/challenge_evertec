@@ -1,4 +1,5 @@
 import 'package:challenge_evertec/core/di/service_locator.dart';
+import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:challenge_evertec/features/movies/presentation/cubit/movie_detail/movie_detail_cubit.dart';
 import 'package:challenge_evertec/features/movies/presentation/cubit/movie_detail/movie_detail_state.dart';
 import 'package:challenge_evertec/features/movies/presentation/widgets/movie_detail.dart';
@@ -12,8 +13,14 @@ class MovieDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<MovieDetailCubit>()..loadMovieDetails(movieId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<MovieDetailCubit>()..loadMovieDetails(movieId),
+        ),
+        BlocProvider.value(value: getIt<FavoritesCubit>()..startListening()),
+      ],
+
       child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
         builder: (context, state) {
           return switch (state) {
