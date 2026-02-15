@@ -70,6 +70,31 @@ Data → DataSources, Models, Implementaciones
 
 - TheMovieDB API
 
+## 🛠️ Requisitos del entorno
+
+Este proyecto fue desarrollado con:
+
+- **Flutter:** 3.38.3 (stable)
+- **Dart:** 3.10.1
+- **DevTools:** 2.51.1
+
+Puedes verificar tu versión ejecutando:
+
+```bash
+flutter --version
+```
+
+## 📱 Compatibilidad de plataforma
+
+### Android
+- minSdkVersion: 21
+- targetSdkVersion: 34
+- compileSdkVersion: 34
+
+### iOS
+- Deployment Target: 15.0+
+
+
 ## 🔑 Configuración del proyecto
 
 ### 1️⃣ Clonar repositorio
