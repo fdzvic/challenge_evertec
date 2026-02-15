@@ -116,6 +116,12 @@ class _CustomAppBar extends StatelessWidget {
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.favorite_border_outlined),
+        ),
+      ],
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.all(10),
         title: Text(
@@ -132,18 +138,38 @@ class _CustomAppBar extends StatelessWidget {
             SizedBox.expand(
               child: Image.network(movie.posterPath, fit: BoxFit.cover),
             ),
-            const SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    stops: [0.0, 0.5],
-                    colors: [Colors.black87, Colors.transparent],
-                  ),
-                ),
-              ),
+            const _CustomGradient(begin: Alignment.topLeft),
+            const _CustomGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomGradient extends StatelessWidget {
+  const _CustomGradient({
+    this.begin = Alignment.topCenter,
+    this.end = Alignment.bottomCenter,
+  });
+
+  final AlignmentGeometry begin;
+  final AlignmentGeometry end;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: begin,
+            end: end,
+            stops: const [0.0, 0.5],
+            colors: const [Colors.black87, Colors.transparent],
+          ),
         ),
       ),
     );
