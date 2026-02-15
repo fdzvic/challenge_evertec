@@ -29,21 +29,21 @@ La app consume la API pública de **TheMovieDB**, soporta autenticación con **F
 
 El proyecto sigue **Clean Architecture**:
 
+```text
 lib/
- ├── core/
- │    ├── database/
- │    ├── network/
- │    ├── router/
- │    └── utils/
- │
- ├── features/
- │    ├── auth/
- │    ├── movies/
- │    ├── favorites/
- │    ├── profile/
- │    └── home/
-
-Capas
+├── core/
+│   ├── database/
+│   ├── network/
+│   ├── router/
+│   └── utils/
+└── features/
+    ├── auth/
+    ├── movies/
+    ├── favorites/
+    ├── profile/
+    └── home/
+```
+### Capas:
 
 Presentation → UI, Cubits, Widgets
 
@@ -54,25 +54,27 @@ Data → DataSources, Models, Implementaciones
 
 ## 🛠 Tecnologías usadas
 
-Flutter
+- Flutter
 
-Firebase Auth
+- Firebase Auth
 
-Firestore
+- Firestore
 
-Drift (SQLite ORM)
+- Drift
 
-BLoC / Cubit
+- BLoC / Cubit
 
-GoRouter
+- GoRouter
 
-Connectivity Plus
+- Connectivity Plus
 
-TheMovieDB API
+- TheMovieDB API
 
 ## 🔑 Configuración del proyecto
 
 ### 1️⃣ Clonar repositorio
+
+Repositorio : https://github.com/fdzvic/challenge_evertec
 
 ```bash
 git clone https://github.com/fdzvic/challenge_evertec.git
@@ -82,25 +84,32 @@ cd challenge_evertec
 
 Crear archivo .env en la raíz:
 
+```bash
 TMDB_API_KEY=TU_API_KEY_AQUI
 TMDB_BASE_URL=https://api.themoviedb.org/3
-
+``` 
 nota: Escribeme si requieres el TMDB_API_KEY a mi correo electronico ing.vhfernandez@gmail.com
 
 ### 3️⃣ Instalar dependencias
+```bash
 flutter clean
 flutter pub get
-
+``` 
 ### 4️⃣ Ejecutar app
 flutter run
 
 ## 👨‍💻 Autor
 
 Víctor Fernández
+
 Flutter Developer
 
 correo: ing.vhfernandez@gmail.com
+
 GitHub: https://github.com/fdzvic
+
+Repositorio : https://github.com/fdzvic/challenge_evertec
+
 
 ## 📄 Licencia
 
