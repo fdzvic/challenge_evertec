@@ -1,3 +1,4 @@
+import 'package:challenge_evertec/core/utils/design/design.dart';
 import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:challenge_evertec/features/favorites/presentation/cubit/favorites_state.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_details_entity.dart';
@@ -130,16 +131,30 @@ class _CustomAppBar extends StatelessWidget {
                 (fav) => fav.movieId == movie.id,
               );
             }
-
             return IconButton(
-              onPressed: () {
-                context.read<FavoritesCubit>().toggleFavorite(
-                  movieId: movie.id,
-                  title: movie.title,
-                  posterPath: movie.posterPath,
-                  backdropPath: movie.posterPath,
-                  originalTitle: movie.title,
-                  voteAverage: movie.voteAverage,
+              onPressed: () async {
+                final added = await context
+                    .read<FavoritesCubit>()
+                    .toggleFavorite(
+                      movieId: movie.id,
+                      title: movie.title,
+                      posterPath: movie.posterPath,
+                      backdropPath: movie.posterPath,
+                      originalTitle: movie.title,
+                      voteAverage: movie.voteAverage,
+                    );
+
+                if (!context.mounted) return;
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      added
+                          ? 'Añadida a favoritos ❤️'
+                          : 'Eliminada de favoritos 💔',
+                    ),
+                    duration: const Duration(seconds: 2),
+                  ),
                 );
               },
               icon: AnimatedSwitcher(
@@ -170,8 +185,8 @@ class _CustomAppBar extends StatelessWidget {
             SizedBox.expand(
               child: Image.network(movie.posterPath, fit: BoxFit.cover),
             ),
-            const _CustomGradient(begin: Alignment.topLeft),
-            const _CustomGradient(
+            const EvGradient(begin: Alignment.topLeft),
+            const EvGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
             ),
@@ -182,28 +197,4 @@ class _CustomAppBar extends StatelessWidget {
   }
 }
 
-class _CustomGradient extends StatelessWidget {
-  const _CustomGradient({
-    this.begin = Alignment.topCenter,
-    this.end = Alignment.bottomCenter,
-  });
 
-  final AlignmentGeometry begin;
-  final AlignmentGeometry end;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: begin,
-            end: end,
-            stops: const [0.0, 0.5],
-            colors: const [Colors.black87, Colors.transparent],
-          ),
-        ),
-      ),
-    );
-  }
-}

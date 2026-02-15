@@ -28,7 +28,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     });
   }
 
-  Future<void> toggleFavorite({
+  Future<bool> toggleFavorite({
     required int movieId,
     required String title,
     required String posterPath,
@@ -55,7 +55,10 @@ class FavoritesCubit extends Cubit<FavoritesState> {
           ),
         );
       }
+
+      return !exists;
     }
+    return false;
   }
 
   @override
