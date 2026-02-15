@@ -5,11 +5,12 @@ class EvAppBar extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
-    this.onSearchPressed,
+    this.onSearchPressed, this.viewIconSearch = true,
   });
   final String title;
   final IconData icon;
   final VoidCallback? onSearchPressed;
+  final bool viewIconSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class EvAppBar extends StatelessWidget {
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Spacer(),
+            if(viewIconSearch)
             IconButton(onPressed: onSearchPressed ?? (() {}), icon: const Icon(Icons.search),),
           ],
         ),

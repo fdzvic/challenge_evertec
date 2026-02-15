@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:challenge_evertec/core/utils/design/design.dart';
+import 'package:challenge_evertec/core/utils/ui/snackbar_utils.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
 import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movies_cubit.dart';
 import 'package:challenge_evertec/features/movies/presentation/widgets/movies_horizontal_listview.dart';
@@ -31,9 +30,7 @@ class MoviesCategoriesHome extends StatelessWidget {
           title: EvAppBar(
             title: 'Peliculas',
             icon: Icons.movie,
-            onSearchPressed: () {
-              log('Buscando...');
-            },
+            onSearchPressed: () => showFeatureNotAvailable(context),
           ),
         ),
         SliverList(
