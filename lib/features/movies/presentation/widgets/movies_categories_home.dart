@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:challenge_evertec/core/utils/design/design.dart';
 import 'package:challenge_evertec/features/movies/domain/entities/movie_entity.dart';
 import 'package:challenge_evertec/features/movies/presentation/cubit/movies/movies_cubit.dart';
@@ -30,7 +32,7 @@ class MoviesCategoriesHome extends StatelessWidget {
             title: 'Peliculas',
             icon: Icons.movie,
             onSearchPressed: () {
-              print('Buscando...');
+              log('Buscando...');
             },
           ),
         ),

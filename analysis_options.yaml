@@ -30,7 +30,6 @@ linter:
     unnecessary_nullable_for_final_variable_declarations: true
 
     # 🧹 Código limpio
-    avoid_unused_parameters: true
     unnecessary_this: true
     prefer_final_fields: true
     prefer_final_locals: true
