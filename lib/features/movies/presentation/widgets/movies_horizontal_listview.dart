@@ -16,7 +16,8 @@ class MoviesHorizontalListview extends StatefulWidget {
   final VoidCallback? loadNextPage;
 
   @override
-  State<MoviesHorizontalListview> createState() => _MoviesHorizontalListviewState();
+  State<MoviesHorizontalListview> createState() =>
+      _MoviesHorizontalListviewState();
 }
 
 class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
@@ -26,7 +27,7 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
   void initState() {
     super.initState();
     scrollController.addListener(() {
-      if(widget.loadNextPage == null) return;
+      if (widget.loadNextPage == null) return;
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent - 200) {
         widget.loadNextPage?.call();
@@ -40,16 +41,13 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
       child: Column(
         children: [
-          if (widget.title != null)
-            _Title(title: widget.title),
+          if (widget.title != null) _Title(title: widget.title),
           Expanded(
             child: ListView.builder(
               controller: scrollController,
@@ -78,9 +76,7 @@ class _Title extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (title != null) Text(title!, style: titleStyle),
-        ],
+        children: [if (title != null) Text(title!, style: titleStyle)],
       ),
     );
   }
@@ -129,6 +125,10 @@ class _Slide extends StatelessWidget {
                     ),
                   );
                 },
+                errorBuilder: (context, error, stackTrace) => Image.asset(
+                  'assets/images/placeholder.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

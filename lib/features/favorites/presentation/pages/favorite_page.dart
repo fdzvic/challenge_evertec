@@ -43,7 +43,8 @@ class FavoritesPage extends StatelessWidget {
                           final movie = state.favorites[index];
 
                           return GestureDetector(
-                            onTap: () => context.push('/home/0/movie/${movie.movieId}'),
+                            onTap: () =>
+                                context.push('/home/0/movie/${movie.movieId}'),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: Stack(
@@ -52,6 +53,12 @@ class FavoritesPage extends StatelessWidget {
                                     child: Image.network(
                                       movie.posterPath,
                                       fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.asset(
+                                                'assets/images/placeholder.jpg',
+                                                fit: BoxFit.cover,
+                                              ),
                                     ),
                                   ),
                                   const EvGradient(
@@ -74,10 +81,12 @@ class FavoritesPage extends StatelessWidget {
                                             originalTitle: movie.originalTitle,
                                             voteAverage: movie.voteAverage,
                                           );
-                            
+
                                       if (!context.mounted) return;
-                            
-                                      ScaffoldMessenger.of(context).showSnackBar(
+
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
                                         SnackBar(
                                           content: Text(
                                             removed

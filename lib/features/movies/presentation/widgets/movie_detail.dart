@@ -56,6 +56,10 @@ class _Details extends StatelessWidget {
                     movie.posterPath,
                     width: size.width * 0.3,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      'assets/images/placeholder.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -183,7 +187,14 @@ class _CustomAppBar extends StatelessWidget {
         background: Stack(
           children: [
             SizedBox.expand(
-              child: Image.network(movie.posterPath, fit: BoxFit.cover),
+              child: Image.network(
+                movie.posterPath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Image.asset(
+                  'assets/images/placeholder.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             const EvGradient(begin: Alignment.topLeft),
             const EvGradient(
@@ -196,5 +207,3 @@ class _CustomAppBar extends StatelessWidget {
     );
   }
 }
-
-

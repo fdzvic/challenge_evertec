@@ -47,7 +47,12 @@ class _Slide extends StatelessWidget {
         decoration: decoration,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.network(movie.backdropPath, fit: BoxFit.cover),
+          child: Image.network(
+            movie.backdropPath,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) =>
+                Image.asset('assets/images/placeholder.jpg', fit: BoxFit.cover),
+          ),
         ),
       ),
     );
