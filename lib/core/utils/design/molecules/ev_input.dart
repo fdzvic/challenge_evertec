@@ -9,12 +9,14 @@ class EvInput extends StatefulWidget {
     required this.controller,
     required this.label,
     this.inputValueType = InputValueType.text,
-    this.matchValue,
+    this.matchController,
+    this.withValidator = true,
   });
   final TextEditingController controller;
   final String label;
   final InputValueType inputValueType;
-  final String? matchValue;
+  final TextEditingController? matchController;
+  final bool withValidator;
 
   @override
   State<EvInput> createState() => _EvInputState();
@@ -24,7 +26,7 @@ class _EvInputState extends State<EvInput> {
   FocusNode focusNode = FocusNode();
   bool obscureText = false;
   String? errorMessage;
-  bool? showError = false;
+  bool showError = false;
 
   @override
   void initState() {
@@ -34,6 +36,8 @@ class _EvInputState extends State<EvInput> {
       setState(() {});
     });
 
+    widget.controller.addListener(_onTextChanged);
+    widget.matchController?.addListener(_onTextChanged);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _defineObscureTextValue();
     });
@@ -41,6 +45,8 @@ class _EvInputState extends State<EvInput> {
 
   @override
   void dispose() {
+    widget.controller.removeListener(_onTextChanged);
+    widget.matchController?.removeListener(_onTextChanged);
     focusNode.dispose();
     super.dispose();
   }
@@ -52,11 +58,31 @@ class _EvInputState extends State<EvInput> {
       decoration: InputDecoration(
         labelText: widget.label,
         border: const OutlineInputBorder(),
+        errorText: showError == true ? errorMessage : null,
+        suffixIcon: widget.inputValueType == InputValueType.password
+            ? IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: _togglePasswordVisibility,
+              )
+            : null,
       ),
       keyboardType: _keyboardType(),
       obscureText: obscureText,
-      validator: (x) => _validateInput(x ?? ''),
+      validator: widget.withValidator ? (value) => _validator(value) : null,
     );
+  }
+
+  String? _validator(String? value) {
+    final error = _validate(value ?? '');
+
+    setState(() {
+      errorMessage = error;
+      showError = error != null;
+    });
+
+    return error;
   }
 
   void _defineObscureTextValue() {
@@ -79,33 +105,41 @@ class _EvInputState extends State<EvInput> {
     }
   }
 
-  String? _validateInput(String x) {
-    _validate(x);
-    setState(() {});
-    return errorMessage;
-  }
-
   String? _validate(String text) {
     switch (widget.inputValueType) {
       case InputValueType.email:
-        errorMessage = validateEmail(text);
-        break;
+        return validateEmail(text);
+
       case InputValueType.password:
-        errorMessage = validatePassword(text, matchValue: widget.matchValue);
-        break;
+        return validatePassword(text, matchValue: widget.matchController?.text);
+
       case InputValueType.name:
-        errorMessage = validateName(text, matchValue: widget.matchValue);
-        break;
+        return validateName(text);
 
       case InputValueType.phone:
-        errorMessage = validatePhone(text, matchValue: widget.matchValue);
-        break;
+        return validatePhone(text);
 
       case InputValueType.text:
-        errorMessage = noValidate();
-        break;
+        return null;
     }
-    showError = errorMessage != null;
-    return errorMessage;
+  }
+
+  void _onTextChanged() {
+    if (!widget.withValidator) return;
+
+    final newError = _validate(widget.controller.text);
+
+    if (newError != errorMessage) {
+      setState(() {
+        errorMessage = newError;
+        showError = errorMessage != null;
+      });
+    }
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      obscureText = !obscureText;
+    });
   }
 }

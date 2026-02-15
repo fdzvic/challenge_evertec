@@ -17,14 +17,35 @@ class _LoginFormState extends State<LoginForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  bool get _isFormFilled =>
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(_onFormChanged);
+    _passwordController.addListener(_onFormChanged);
+  }
+
+  void _onFormChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {
@@ -44,11 +65,13 @@ class _LoginFormState extends State<LoginForm> {
                 controller: _passwordController,
                 label: S.current.password,
                 inputValueType: InputValueType.password,
+                withValidator: false,
               ),
               const SizedBox(height: 24),
               EvButton(
                 text: S.current.login,
                 isLoading: isLoading,
+                enabled: _isFormFilled && !isLoading,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<AuthCubit>().login(
@@ -61,6 +84,7 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(height: 24),
               EvButton(
                 text: S.current.register,
+                enabled: !isLoading,
                 onPressed: () {
                   context.push('/register');
                 },

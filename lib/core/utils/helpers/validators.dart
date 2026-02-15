@@ -16,21 +16,18 @@ String? validateEmail(String email, {String? matchValue}) {
 }
 
 String? validatePassword(String input, {String? matchValue}) {
-  if (matchValue != null) {
-    return input.isEmpty && matchValue != ''
-        ? 'Este campo es obligatorio'
-        : input.isEmpty
-        ? ''
-        : null;
-  } else {
-    if (input.isEmpty) {
-      return 'Este campo es obligatorio';
-    }
+  if (input.isEmpty) {
+    return 'Este campo es obligatorio';
   }
 
-  if (matchValue != null) {
-    return validateMatchValue(input, matchValue);
+  if (matchValue != null && input != matchValue) {
+    return 'Las contraseñas no coinciden';
   }
+
+  if (input.length < 8) {
+    return 'Debe tener al menos 8 caracteres';
+  }
+
   return null;
 }
 
@@ -53,7 +50,6 @@ String? validatePhone(String input, {String? matchValue}) {
   }
   return null;
 }
-
 
 String? validateMatchValue(String value, String match) => value != match
     ? 'Las contraseñas no coinciden. Corrige y vuelve a intentar'

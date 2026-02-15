@@ -21,6 +21,41 @@ class _RegisterFormState extends State<RegisterForm> {
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
 
+  bool get _isFormFilled =>
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty &&
+      _confirmPasswordController.text.isNotEmpty &&
+      _firstNameController.text.isNotEmpty &&
+      _lastNameController.text.isNotEmpty &&
+      _phoneController.text.isNotEmpty;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _emailController.addListener(_onFormChanged);
+    _passwordController.addListener(_onFormChanged);
+    _confirmPasswordController.addListener(_onFormChanged);
+    _firstNameController.addListener(_onFormChanged);
+    _lastNameController.addListener(_onFormChanged);
+    _phoneController.addListener(_onFormChanged);
+  }
+
+  @override
+void dispose() {
+  _emailController.dispose();
+  _passwordController.dispose();
+  _confirmPasswordController.dispose();
+  _firstNameController.dispose();
+  _lastNameController.dispose();
+  _phoneController.dispose();
+  super.dispose();
+}
+
+  void _onFormChanged() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
@@ -52,7 +87,7 @@ class _RegisterFormState extends State<RegisterForm> {
               const SizedBox(height: 16),
               EvInput(
                 controller: _phoneController,
-                label:S.current.phone,
+                label: S.current.phone,
                 inputValueType: InputValueType.phone,
               ),
               const SizedBox(height: 16),
@@ -72,12 +107,13 @@ class _RegisterFormState extends State<RegisterForm> {
                 controller: _confirmPasswordController,
                 label: S.current.confirmPassword,
                 inputValueType: InputValueType.password,
-                matchValue: _passwordController.text,
+                matchController: _passwordController,
               ),
               const SizedBox(height: 24),
               EvButton(
                 text: S.current.register,
                 isLoading: isLoading,
+                enabled: _isFormFilled,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<AuthCubit>().register(
